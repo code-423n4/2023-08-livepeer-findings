@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "0xHelium",
+  "risk": "2",
+  "title": "Possible DoS on ```bond()``` due to lack of approval < of minter to spend amount LPT from caller",
+  "issueId": 8,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/8"
+}
