@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "Stormreckson",
+  "risk": "2",
+  "title": "Validate that the provided amount of `LPT` to be transferred is not greater than the balance of the `msg.sender` to avoid potential over-withdrawal.",
+  "issueId": 18,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/18"
+}
