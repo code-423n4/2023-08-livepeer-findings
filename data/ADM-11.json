@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "ADM",
+  "risk": "2",
+  "title": "slashTranscoder penalty can be avoided by frontrunning with call to unbond.",
+  "issueId": 11,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/11"
+}
