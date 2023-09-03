@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "moneyversed",
+  "risk": "3",
+  "title": "Amplified vote manipulation and delegator state distortions in `_handleVoteOverrides` mechanism can result in heavily skewed voting outcomes",
+  "issueId": 35,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/35"
+}
