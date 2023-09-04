@@ -75,5 +75,7 @@ Based on my understanding of the system, I think that the default ability of a t
 # Time spent
 20 hours
 
+
+
 ### Time spent:
-15 hours
+20 hours
