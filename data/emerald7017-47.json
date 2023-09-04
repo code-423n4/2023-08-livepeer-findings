@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "emerald7017",
+  "risk": "3",
+  "title": "Malicious actors can deploy fake `minter` contracts and exploit the vulnerability to transfer tokens or ETH to their own addresses, causing financial losses to users of the smart contract.",
+  "issueId": 47,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/47"
+}
