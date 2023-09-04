@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "grearlake",
+  "risk": "2",
+  "title": "Wrong implement of treasuryBalanceCeiling lead to user have to pay more fee than intended",
+  "issueId": 38,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/38"
+}
