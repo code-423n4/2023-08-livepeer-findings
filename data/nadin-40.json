@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "nadin",
+  "risk": "2",
+  "title": "`CLOCK_MODE` will not work properly because it does not comply with EIP-6372",
+  "issueId": 40,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/40"
+}
