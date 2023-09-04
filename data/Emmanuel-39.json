@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "Emmanuel",
+  "risk": "3",
+  "title": "Transferring of bond deducts _amount from caller, but _delegator will be credited with 0 amount",
+  "issueId": 39,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/39"
+}
