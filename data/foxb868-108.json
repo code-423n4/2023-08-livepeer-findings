@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "foxb868",
+  "risk": "3",
+  "title": "The user's tokens will be lost, and there is no mechanism in place to recover them.",
+  "issueId": 108,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/108"
+}
