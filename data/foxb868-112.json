@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "foxb868",
+  "risk": "3",
+  "title": "A malicious transcoder could set an extremely high `rewardCut`, close to 100%, diverting most rewards to themselves and leaving little for delegators.",
+  "issueId": 112,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/112"
+}
