@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "0xbrett8571",
+  "risk": "2",
+  "title": "If the value returned by `currentRound()` is greater than or equal to `2^48`, the downcast will result in an overflow because a uint48 can only represent values from `0` to `2^48 - 1`, which is `281,474,976,710,655`.",
+  "issueId": 78,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/78"
+}
