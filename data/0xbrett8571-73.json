@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "0xbrett8571",
+  "risk": "2",
+  "title": "An attacker could repeatedly query the function to slow down the transcoding process. This could have a negative impact on the transcoding service, and could lead to lost revenue for the transcoder.",
+  "issueId": 73,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/73"
+}
