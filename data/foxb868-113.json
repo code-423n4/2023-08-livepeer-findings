@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "foxb868",
+  "risk": "3",
+  "title": "Malicious actors can exploit this lack of validation by setting `_delegator` to an address they control.",
+  "issueId": 113,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/113"
+}
