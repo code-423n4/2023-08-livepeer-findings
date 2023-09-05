@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "foxb868",
+  "risk": "3",
+  "title": "Address Attacker might receive tokens and privileges that should only be granted to registered `transcoders`, potentially compromising the integrity of the system.",
+  "issueId": 114,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/114"
+}
