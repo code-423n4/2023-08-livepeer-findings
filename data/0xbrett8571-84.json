@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "0xbrett8571",
+  "risk": "3",
+  "title": " Lacks of proper validation of the `_transcoder` address and the `_finder` address which can lead to vulnerabilities.",
+  "issueId": 84,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/84"
+}
