@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "0xbrett8571",
+  "risk": "2",
+  "title": "Unauthorized parties can determine the active status of any `transcoder`, which could violate the privacy of the `transcoder`.",
+  "issueId": 72,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/72"
+}
