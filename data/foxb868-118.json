@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "foxb868",
+  "risk": "2",
+  "title": "Lack of synchronization when updating a delegate's delegated amount in the smart contract's functions.",
+  "issueId": 118,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/118"
+}
