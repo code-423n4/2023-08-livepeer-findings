@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "Banditx0x",
+  "risk": "2",
+  "title": "When user rebonds, delegate address can be set to any address by a user who frontruns them with `bondForWithHint` with just 1 token",
+  "issueId": 99,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/99"
+}
