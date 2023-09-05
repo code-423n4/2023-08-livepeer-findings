@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "0xbrett8571",
+  "risk": "2",
+  "title": "When a new total active stake checkpoint is added with the same start round as an existing one, it overwrites the previous checkpoint for that round. This can result in the loss of historical total active stake data.",
+  "issueId": 80,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/80"
+}
