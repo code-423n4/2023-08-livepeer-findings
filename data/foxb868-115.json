@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "foxb868",
+  "risk": "3",
+  "title": "Potential overflow caused by downcasting a `uint256` to a smaller data type `uint32`. ",
+  "issueId": 115,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/115"
+}
