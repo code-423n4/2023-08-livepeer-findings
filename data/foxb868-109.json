@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "foxb868",
+  "risk": "3",
+  "title": "If the `minter` contract successfully accepts the withdrawal request but fails to transfer ETH to the `_recipient`, the `withdrawFees` function proceeds without detecting the failure, leading to a loss of funds for the caller.",
+  "issueId": 109,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/109"
+}
