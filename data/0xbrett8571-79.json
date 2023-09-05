@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "0xbrett8571",
+  "risk": "3",
+  "title": "If `_round` is very close to its maximum value `(2^256 - 1)`, adding 1 to it can result in an overflow, causing `_round + 1` to wrap around to zero.",
+  "issueId": 79,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/79"
+}
