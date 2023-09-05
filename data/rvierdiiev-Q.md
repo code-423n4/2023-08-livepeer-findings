@@ -6,3 +6,11 @@ In case if he decides to fully [unbond](https://github.com/code-423n4/2023-08-li
 
 ### Recommendation
 When unbond transcoder, check that his last `lastRewardRound` is current round, or call `reward`.
+
+## QA-02. BondingManager.withdrawFees doesn't create checkpoint
+
+When `withdrawFees` function is called, [then `autoClaimEarnings` modifier is used](https://github.com/code-423n4/2023-08-livepeer/blob/main/contracts/bonding/BondingManager.sol#L277C9-L277C26), which will update user's staked amount according to the earned rewards. 
+
+As bonded amount has changed, that means that new checkpoint should be created, but `withdrawFees` function doesn't do that.
+### Recommendation
+Create checkpoint for `withdrawFees` function.
