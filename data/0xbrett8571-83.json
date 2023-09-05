@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "0xbrett8571",
+  "risk": "2",
+  "title": "Retrieving checkpoint data for a specific round may not behave as expected due to the presence of duplicated items.",
+  "issueId": 83,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/83"
+}
