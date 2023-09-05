@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "lsaudit",
+  "risk": "3",
+  "title": "`_voteSucceeded` returns true even when there is more `againstVotes` than `forVotes`",
+  "issueId": 127,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/127"
+}
