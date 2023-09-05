@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "0xbrett8571",
+  "risk": "3",
+  "title": "Calling these functions with arbitrary or invalid addresses may lead to results that do not correspond to valid data within the contract, causing confusion or incorrect decision-making for users or other smart contracts.",
+  "issueId": 76,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/76"
+}
