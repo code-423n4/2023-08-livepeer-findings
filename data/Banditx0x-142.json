@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "Banditx0x",
+  "risk": "3",
+  "title": "Delegator can get rewards from a transcoder's previous rounds, even if they weren't delegated to them at the time",
+  "issueId": 142,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/142"
+}
