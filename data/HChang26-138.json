@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "HChang26",
+  "risk": "3",
+  "title": "Missing checkpoints in `tryToJoinActiveSet()`",
+  "issueId": 138,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/138"
+}
