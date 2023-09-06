@@ -26,7 +26,7 @@
 2023-08-livepeer/contracts/bonding/BondingVotes.sol::436 => if (bond.bondedAmount > 0) {
 2023-08-livepeer/contracts/bonding/BondingVotes.sol::507 => if (rewardRound > 0) {
 ```
-## [G-03] Use immutable for openzeppelin access controls roles declarations
+## [G-03] Long revert strings
 ```txt
 2023-08-livepeer/contracts/bonding/BondingManager.sol::1618 => return ILivepeerToken(controller.getContract(keccak256("LivepeerToken")));
 2023-08-livepeer/contracts/bonding/BondingManager.sol::1626 => return IMinter(controller.getContract(keccak256("Minter")));
@@ -41,13 +41,6 @@
 2023-08-livepeer/contracts/bonding/BondingVotes.sol::547 => return IRoundsManager(controller.getContract(keccak256("RoundsManager")));
 2023-08-livepeer/contracts/treasury/LivepeerGovernor.sol::102 => return IVotes(controller.getContract(keccak256("BondingVotes")));
 2023-08-livepeer/contracts/treasury/LivepeerGovernor.sol::109 => return Treasury(payable(controller.getContract(keccak256("Treasury"))));
-```
-## [G-04] Long revert strings
-```txt
-2023-08-livepeer/contracts/bonding/BondingManager.sol::8 => import "../libraries/PreciseMathUtils.sol";
-2023-08-livepeer/contracts/bonding/BondingManager.sol::10 => import "./libraries/EarningsPoolLIP36.sol";
-2023-08-livepeer/contracts/bonding/BondingManager.sol::17 => import "@openzeppelin/contracts/utils/math/SafeMath.sol";
-2023-08-livepeer/contracts/bonding/BondingManager.sol::256 => "withdraw round must be before or equal to the current round"
 2023-08-livepeer/contracts/bonding/BondingManager.sol::493 => require(!roundsManager().currentRoundLocked(), "can't update transcoder params, current round is locked");
 2023-08-livepeer/contracts/bonding/BondingManager.sol::503 => "caller can't be active or must have already called reward for the current round"
 2023-08-livepeer/contracts/bonding/BondingManager.sol::584 => require(!isRegisteredTranscoder(_owner), "registered transcoders can't delegate towards other addresses");
@@ -60,6 +53,14 @@
 2023-08-livepeer/contracts/bonding/BondingManager.sol::1654 => require(msg.sender == controller.getContract(keccak256("TicketBroker")), "caller must be TicketBroker");
 2023-08-livepeer/contracts/bonding/BondingManager.sol::1658 => require(msg.sender == controller.getContract(keccak256("RoundsManager")), "caller must be RoundsManager");
 2023-08-livepeer/contracts/bonding/BondingManager.sol::1662 => require(msg.sender == controller.getContract(keccak256("Verifier")), "caller must be Verifier");
+2023-08-livepeer/contracts/treasury/GovernorCountingOverridable.sol::77 => return "support=bravo&quorum=for,abstain,against";
+```
+## [G-04] Use immutable for openzeppelin access controls roles declarations
+```txt
+2023-08-livepeer/contracts/bonding/BondingManager.sol::8 => import "../libraries/PreciseMathUtils.sol";
+2023-08-livepeer/contracts/bonding/BondingManager.sol::10 => import "./libraries/EarningsPoolLIP36.sol";
+2023-08-livepeer/contracts/bonding/BondingManager.sol::17 => import "@openzeppelin/contracts/utils/math/SafeMath.sol";
+2023-08-livepeer/contracts/bonding/BondingManager.sol::256 => "withdraw round must be before or equal to the current round"
 2023-08-livepeer/contracts/bonding/BondingVotes.sol::4 => import "@openzeppelin/contracts/utils/Arrays.sol";
 2023-08-livepeer/contracts/bonding/BondingVotes.sol::5 => import "@openzeppelin/contracts/utils/math/SafeCast.sol";
 2023-08-livepeer/contracts/bonding/BondingVotes.sol::8 => import "./libraries/EarningsPoolLIP36.sol";
@@ -72,7 +73,6 @@
 2023-08-livepeer/contracts/treasury/GovernorCountingOverridable.sol::6 => import "@openzeppelin/contracts-upgradeable/interfaces/IERC5805Upgradeable.sol";
 2023-08-livepeer/contracts/treasury/GovernorCountingOverridable.sol::8 => import "../bonding/libraries/EarningsPool.sol";
 2023-08-livepeer/contracts/treasury/GovernorCountingOverridable.sol::9 => import "../bonding/libraries/EarningsPoolLIP36.sol";
-2023-08-livepeer/contracts/treasury/GovernorCountingOverridable.sol::77 => return "support=bravo&quorum=for,abstain,against";
 2023-08-livepeer/contracts/treasury/IVotes.sol::4 => import "@openzeppelin/contracts-upgradeable/interfaces/IERC5805Upgradeable.sol";
 2023-08-livepeer/contracts/treasury/LivepeerGovernor.sol::4 => import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 2023-08-livepeer/contracts/treasury/LivepeerGovernor.sol::5 => import "@openzeppelin/contracts-upgradeable/governance/GovernorUpgradeable.sol";
@@ -88,5 +88,4 @@
 ## [G-05] Use shift rightleft instead of division multiplication if possible
 ```txt
 2023-08-livepeer/contracts/bonding/BondingManager.sol::32 => uint256 constant MAX_FUTURE_ROUND = 2**256 - 1;
-2023-08-livepeer/contracts/treasury/GovernorCountingOverridable.sol::222 => * See https://docs.openzeppelin.com/contracts/4.x/upgradeable#storage_gaps
 ```
