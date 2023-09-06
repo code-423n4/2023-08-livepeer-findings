@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "arbitrum block.number refers to L1 block number, not L2 block number when determining the round",
+  "issueId": 232,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/232"
+}
