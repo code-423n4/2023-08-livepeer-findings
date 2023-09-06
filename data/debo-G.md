@@ -99,7 +99,7 @@ Changing the variables to immutable results in computing the hash only once on d
 2023-08-livepeer/contracts/treasury/LivepeerGovernor.sol::17 => import "./GovernorCountingOverridable.sol";
 2023-08-livepeer/contracts/treasury/Treasury.sol::4 => import "@openzeppelin/contracts-upgradeable/governance/TimelockControllerUpgradeable.sol";
 ```
-## [G-05] Use shift or rightleft instead of division or multiplication if possible
+## [G-05] Use shift right or left instead of division or multiplication if possible
 Description
 A division/multiplication by any number x being a power of 2 can be calculated by shifting log2(x) to the right/left.
 
