@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "Shubham",
+  "risk": "3",
+  "title": "Users can withdraw token multiple times by calling `withdrawStake' thereby depleting the treasury",
+  "issueId": 203,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/203"
+}
