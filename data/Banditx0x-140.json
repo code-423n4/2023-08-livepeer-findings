@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "Banditx0x",
+  "risk": "3",
+  "title": "RewardCut and FeeShare are based on the current state rather than the settings of the transcoder at the time the round was initialized",
+  "issueId": 140,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/140"
+}
