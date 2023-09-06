@@ -25,7 +25,7 @@ The code comments are unclear and do not match the actual code logic.
 
 Adjust code comments to follow function logic.
 
-### [L-02]
+
 
 ### [C-01] Unused import Statement in BondingManager.sol 
 In the contract file BondingManager.sol, there is an import statement that appears to be unused. Specifically, the import statement for `"../snapshots/IMerkleSnapshot.sol"` is not referenced anywhere within the contract code. This unused import statement should be reviewed and potentially removed to maintain code cleanliness and reduce unnecessary complexity.
