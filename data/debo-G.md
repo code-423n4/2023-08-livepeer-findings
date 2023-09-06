@@ -1,4 +1,6 @@
 ## [G-01] Cache array length outside of loop
+Description
+Caching the array length outside a loop saves reading it on each iteration, as long as the array's length is not changed during the loop.
 ```txt
 2023-08-livepeer/contracts/bonding/BondingVotes.sol::316 => return bondingCheckpoints[_account].startRounds.length > 0;
 2023-08-livepeer/contracts/bonding/BondingVotes.sol::341 => } else if (upper < initializedRounds.length) {
@@ -8,7 +10,9 @@
 2023-08-livepeer/contracts/bonding/libraries/SortedArrays.sol::65 => if (array.length == 0) {
 2023-08-livepeer/contracts/bonding/libraries/SortedArrays.sol::68 => uint256 last = array[array.length - 1];
 ```
-## [G-02] Use greater than or equal to 1 instead of greater than 0 for unsigned integer comparison
+## [G-02] Use not equal to 0 instead of greater than 0 for unsigned integer comparison
+Description
+When dealing with unsigned integer types, comparisons with != 0 are cheaper than with > 0.
 ```txt
 2023-08-livepeer/contracts/bonding/BondingManager.sol::404 => if (del.bondedAmount > 0) {
 2023-08-livepeer/contracts/bonding/BondingManager.sol::578 => } else if (currentBondedAmount > 0 && currentDelegate != _to) {
@@ -27,6 +31,10 @@
 2023-08-livepeer/contracts/bonding/BondingVotes.sol::507 => if (rewardRound > 0) {
 ```
 ## [G-03] Long revert strings
+Description
+Shortening revert strings to fit in 32 bytes will decrease gas costs for deployment and gas costs when the revert condition has been met.
+
+If the contract(s) in scope allow using Solidity >=0.8.4, consider using Custom Errors as they are more gas efficient while allowing developers to describe the error in detail using NatSpec.
 ```txt
 2023-08-livepeer/contracts/bonding/BondingManager.sol::1618 => return ILivepeerToken(controller.getContract(keccak256("LivepeerToken")));
 2023-08-livepeer/contracts/bonding/BondingManager.sol::1626 => return IMinter(controller.getContract(keccak256("Minter")));
@@ -56,6 +64,12 @@
 2023-08-livepeer/contracts/treasury/GovernorCountingOverridable.sol::77 => return "support=bravo&quorum=for,abstain,against";
 ```
 ## [G-04] Use immutable for openzeppelin access controls roles declarations
+Description
+⚡️ Only valid for solidity versions <0.6.12 ⚡️
+
+Access roles marked as constant results in computing the keccak256 operation each time the variable is used because assigned operations for constant variables are re-evaluated every time.
+
+Changing the variables to immutable results in computing the hash only once on deployment, leading to gas savings.
 ```txt
 2023-08-livepeer/contracts/bonding/BondingManager.sol::8 => import "../libraries/PreciseMathUtils.sol";
 2023-08-livepeer/contracts/bonding/BondingManager.sol::10 => import "./libraries/EarningsPoolLIP36.sol";
@@ -85,7 +99,11 @@
 2023-08-livepeer/contracts/treasury/LivepeerGovernor.sol::17 => import "./GovernorCountingOverridable.sol";
 2023-08-livepeer/contracts/treasury/Treasury.sol::4 => import "@openzeppelin/contracts-upgradeable/governance/TimelockControllerUpgradeable.sol";
 ```
-## [G-05] Use shift rightleft instead of division multiplication if possible
+## [G-05] Use shift or rightleft instead of division or multiplication if possible
+Description
+A division/multiplication by any number x being a power of 2 can be calculated by shifting log2(x) to the right/left.
+
+While the DIV opcode uses 5 gas, the SHR opcode only uses 3 gas. Furthermore, Solidity's division operation also includes a division-by-0 prevention which is bypassed using shifting.
 ```txt
 2023-08-livepeer/contracts/bonding/BondingManager.sol::32 => uint256 constant MAX_FUTURE_ROUND = 2**256 - 1;
 ```
