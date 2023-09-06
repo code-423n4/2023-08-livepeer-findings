@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "Inactive Orchestrators and delegators's vote still counts towards as effective when calculating the quota and quorum",
+  "issueId": 229,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/229"
+}
