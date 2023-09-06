@@ -290,7 +290,21 @@ FILE: Breadcrumbs2023-08-livepeer/contracts/bonding/BondingVotes.sol
 ```
 ##
 
-## [G-5] 
+## [G-5] Don't declare seperate varibale for if and else if blocks
+
+Don't cache variable only used once 
+
+Is there any possibility refacture the code 
+
+Use calldata pointer instead of memory when the values not changed 
+
+Combine multiple emits 
+
+use assembly to write state variable 
+
+Optimize for loops by utilizing unchecked math and no i instantiation here we can optimize this for loop by rewriting it like this .don't initialize default values 
+
+
 
 
 
