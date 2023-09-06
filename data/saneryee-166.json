@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "saneryee",
+  "risk": "2",
+  "title": "Lack of Checks for 'msg.sender': The function checks whether msg.sender is _owner or l2Migrator() but doesn't specify who should normally be calling this function.",
+  "issueId": 166,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/166"
+}
