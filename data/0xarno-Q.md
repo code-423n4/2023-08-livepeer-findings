@@ -1,5 +1,5 @@
 
-# GovernorCountingOverridable._voteSucceeded(): Confusing code comments deviates from function logic
+### [L-01] GovernorCountingOverridable._voteSucceeded(): Confusing code comments deviates from function logic
 
 #### Impact
 
@@ -24,4 +24,13 @@ The code comments are unclear and do not match the actual code logic.
 #### Recommendation
 
 Adjust code comments to follow function logic.
+
+### [L-02]
+
+### [C-01] Unused import Statement in BondingManager.sol 
+In the contract file BondingManager.sol, there is an import statement that appears to be unused. Specifically, the import statement for `"../snapshots/IMerkleSnapshot.sol"` is not referenced anywhere within the contract code. This unused import statement should be reviewed and potentially removed to maintain code cleanliness and reduce unnecessary complexity.
+
+https://github.com/code-423n4/2023-08-livepeer/blob/a3d801fa4690119b6f96aeb5508e58d752bda5bc/contracts/bonding/BondingManager.sol#L14
+
+
 
