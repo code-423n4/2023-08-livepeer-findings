@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "seerether",
+  "risk": "3",
+  "title": "Front-running attack can occur between when the unbonding lock is created and when the delegator's bonded amount is decreased.",
+  "issueId": 183,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/183"
+}
