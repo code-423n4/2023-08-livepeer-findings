@@ -43,3 +43,18 @@ if (val < last) {
 
 **Suggested Fix:**
  Remove the check for val < last as it is redundant.
+
+
+[Q-03]: Unbonding Lock ID Mismatch
+
+In the following lines of code:
+
+
+// Create lock for new owner
+uint256 newDelUnbondingLockId = newDel.nextUnbondingLockId;
+newDel.unbondingLocks[newDelUnbondingLockId] = UnbondingLock({ amount: _amount, withdrawRound: withdrawRound });
+newDel.nextUnbondingLockId = newDel.nextUnbondingLockId.add(1);
+
+The code creates a new unbonding lock for the new delegate and increments newDel.nextUnbondingLockId. However, this could lead to a mismatch between the unbonding lock ID of the old delegate and the new delegate, especially if multiple unbonding locks have been created and deleted over time. This can cause confusion and incorrect data handling.
+
+Suggested Fix: Ensure that the unbonding lock ID for the new delegate matches the expected value. Check the logic for calculating nextUnbondingLockId to ensure it is consistent with the actual number of unbonding locks.
