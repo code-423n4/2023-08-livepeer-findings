@@ -1,3 +1,10 @@
+## Gas Optimizations
+| Number |Issue|Instances|
+|-|:-|:-:|
+| [G-01] | `Structs` can be packed into fewer storage slots. | 5 | 
+| [G-02] | State variables can be packed into fewer storage slots. | 1 |
+| [G-03] | State variables can be cached instead of re-reading them from storage. | 3 |
+
 ## [G-01] Structs can be packed into fewer storage slots.
 
 The EVM works with 32 byte words. Variables less than 32 bytes can be declared next to each other in storage and this will pack the values together into a single 32 byte storage slot (if values combined are <= 32 bytes). If the variables packed together are retrieved together in functions (more likely with structs), we will effectively save ~2000 gas with every subsequent SLOAD for that storage slot. This is due to us incurring a Gwarmaccess (100 gas) versus a Gcoldsload (2100 gas).
