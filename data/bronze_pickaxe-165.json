@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "bronze_pickaxe",
+  "risk": "3",
+  "title": "Underflow in updateTranscoderWithFees can cause corrupted data and loss of winning tickets.",
+  "issueId": 165,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/165"
+}
