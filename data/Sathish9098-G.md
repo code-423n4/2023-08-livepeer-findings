@@ -2,7 +2,32 @@
 
 ##
 
-## [G-1] Using ``memory`` can be more ``gas-efficient`` when calling the same variable for the second time compared to using ``storage``.
+## [G-1] Minimizing Storage Overhead by Avoiding Unnecessary Boolean Variables
+
+Saves ``20000 GAS``
+
+```
+// Booleans are more expensive than uint256 or any type that takes up a full
+    // word because each write operation emits an extra SLOAD to first read the
+    // slot's contents, replace the bits taken up by the boolean, and then write
+    // back. This is the compiler's defense against contract upgrades and
+    // pointer aliasing, and it cannot be disabled.
+
+```
+
+https://github.com/OpenZeppelin/openzeppelin-contracts/blob/58f635312aa21f947cae5f8578638a85aa2519f5/contracts/security/ReentrancyGuard.sol#L23-L27 Use uint256(1) and uint256(2) for true/false to avoid a Gwarmaccess (100 gas) for the extra SLOAD, and to avoid Gsset (20000 gas) when changing from false to true, after having been true in the past
+
+```solidity
+FILE: 2023-08-livepeer/contracts/treasury/GovernorCountingOverridable.sol
+
+38:   bool hasVoted;
+
+```
+https://github.com/code-423n4/2023-08-livepeer/blob/a3d801fa4690119b6f96aeb5508e58d752bda5bc/contracts/treasury/GovernorCountingOverridable.sol#L38
+
+##
+
+## [G-2] Using ``memory`` can be more ``gas-efficient`` when calling the same variable for the second time compared to using ``storage``.
 
 [As per gas test](https://gist.github.com/sathishpic22/7105cfc254ce026bf5f90c7ec272f0ce) this will save around 150 - 200 GAS . 
 
@@ -19,7 +44,7 @@ FILE: 2023-08-livepeer/contracts/bonding/BondingManager.sol
 ```
 ##
 
-## [G-2] Structs can be packed into fewer storage slots
+## [G-3] Structs can be packed into fewer storage slots
 
 Each slot saved can avoid an extra Gsset (20000 gas) for the first setting of the struct.
 
@@ -91,7 +116,7 @@ struct BondingCheckpoint {
 ```
 ##
 
-## [G-3] ``IF’s/require()`` statements that check ``input arguments`` should be at the top of the function
+## [G-4] ``IF’s/require()`` statements that check ``input arguments`` should be at the top of the function
 
 FAIL CHEEPLY INSTEAD OF COSTLY 
 
@@ -127,7 +152,7 @@ FILE: 2023-08-livepeer/contracts/bonding/BondingManager.sol
 
 ##
 
-## [G-4] State variables that are used multiple times in a function should be cached in stack variables
+## [G-5] State variables that are used multiple times in a function should be cached in stack variables
 
 Caching state variable with memory saves ``100 GAS`` , ``1 SLOD ``
 
@@ -290,19 +315,92 @@ FILE: Breadcrumbs2023-08-livepeer/contracts/bonding/BondingVotes.sol
 ```
 ##
 
-## [G-5] Don't declare seperate varibale for if and else if blocks
+## [G-6] Don't cache state variables or functions only used once
 
-Don't cache variable only used once 
+Saves 20-40 Gas
 
-Is there any possibility refacture the code 
 
-Use calldata pointer instead of memory when the values not changed 
+```diff
+FILE: Breadcrumbs2023-08-livepeer/contracts/bonding/BondingManager.sol
 
-Combine multiple emits 
+- 355: uint256 treasuryRewards = MathUtils.percOf(rewards, treasuryRewardCutRate);
+- 356:  rewards = rewards.sub(treasuryRewards);
++ 356:  rewards = rewards.sub(MathUtils.percOf(rewards, treasuryRewardCutRate));
 
-use assembly to write state variable 
+- 358: uint256 transcoderCommissionRewards = MathUtils.percOf(rewards, earningsPool.transcoderRewardCut);
+- 359: uint256 delegatorsRewards = rewards.sub(transcoderCommissionRewards);
++ 359: uint256 delegatorsRewards = rewards.sub(MathUtils.percOf(rewards, earningsPool.transcoderRewardCut));
 
-Optimize for loops by utilizing unchecked math and no i instantiation here we can optimize this for loop by rewriting it like this .don't initialize default values 
+- uint256 transcoderCommissionFees = _fees.sub(delegatorsFees);
+        // Calculate the fees earned by the transcoder's earned rewards
+        uint256 transcoderRewardStakeFees = PreciseMathUtils.percOf(
+            delegatorsFees,
+            activeCumulativeRewards,
+            totalStake
+        );
+        // Track fees earned by the transcoder based on its earned rewards and feeShare
+-        t.cumulativeFees = t.cumulativeFees.add(transcoderRewardStakeFees).add(transcoderCommissionFees);
++        t.cumulativeFees = t.cumulativeFees.add(transcoderRewardStakeFees).add(_fees.sub(delegatorsFees));
+
+- address oldDelDelegate = oldDel.delegateAddress;
+
+        unbondWithHint(_amount, _oldDelegateNewPosPrev, _oldDelegateNewPosNext);
+
+        uint256 oldDelUnbondingLockId = oldDel.nextUnbondingLockId.sub(1);
+        uint256 withdrawRound = oldDel.unbondingLocks[oldDelUnbondingLockId].withdrawRound;
+
+        // Burn lock for current owner
+        delete oldDel.unbondingLocks[oldDelUnbondingLockId];
+
+        // Create lock for new owner
+        uint256 newDelUnbondingLockId = newDel.nextUnbondingLockId;
+
+        newDel.unbondingLocks[newDelUnbondingLockId] = UnbondingLock({ amount: _amount, withdrawRound: withdrawRound });
+        newDel.nextUnbondingLockId = newDel.nextUnbondingLockId.add(1);
+
+        emit TransferBond(msg.sender, _delegator, oldDelUnbondingLockId, newDelUnbondingLockId, _amount);
+
+        // Claim earnings for receiver before processing unbonding lock
+        uint256 currentRound = roundsManager().currentRound();
+        uint256 lastClaimRound = newDel.lastClaimRound;
+        if (lastClaimRound < currentRound) {
+            updateDelegatorWithEarnings(_delegator, currentRound, lastClaimRound);
+        }
+
+        // Rebond lock for new owner
+        if (newDel.delegateAddress == address(0) && newDel.bondedAmount == 0) {
+            // Requirements for caller
+            // Does not trigger self-delegation
+            require(oldDelDelegate != _delegator, "INVALID_DELEGATOR");
+
+-             newDel.delegateAddress = oldDelDelegate;
++             newDel.delegateAddress = oldDel.delegateAddress;
+        }
+
+- 758: uint256 currentRound = roundsManager().currentRound();
+- 759:        uint256 withdrawRound = currentRound.add(unbondingPeriod);
++ 759:        uint256 withdrawRound = roundsManager().currentRound().add(unbondingPeriod);
+
+- 872:   uint256 treasuryBalance = livepeerToken().balanceOf(treasury());
+- 873:   if (treasuryBalance >= treasuryBalanceCeiling && nextRoundTreasuryRewardCutRate > 0) {
++ 873:   if (livepeerToken().balanceOf(treasury()) >= treasuryBalanceCeiling && nextRoundTreasuryRewardCutRate > 0) {
+
+- 912: uint256 endRound = roundsManager().currentRound();
+- 913: (uint256 stake, ) = pendingStakeAndFees(_delegator, endRound);
++ 913: (uint256 stake, ) = pendingStakeAndFees(_delegator, roundsManager().currentRound());
+
+- 927:  uint256 endRound = roundsManager().currentRound();
+- 928:  (, uint256 fees) = pendingStakeAndFees(_delegator, endRound);
++ 928:  (, uint256 fees) = pendingStakeAndFees(_delegator, roundsManager().currentRound());
+
+- 1271: address delegateAddr = del.delegateAddress;
+- 1272: bool isTranscoder = _delegator == delegateAddr;
++ 1272: bool isTranscoder = _delegator == del.delegateAddress;
+
+```
+https://github.com/code-423n4/2023-08-livepeer/blob/main/contracts/bonding/BondingManager.sol
+
+
 
 
 
