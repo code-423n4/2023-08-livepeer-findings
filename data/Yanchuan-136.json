@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "Yanchuan",
+  "risk": "2",
+  "title": "If a transcoder has a stake amount of zero, it will not be subject to slashing.",
+  "issueId": 136,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/136"
+}
