@@ -63,6 +63,28 @@ In evaluating the codebase, my approach was to:
 
 **Recommendations**: Based on my analysis, I provided recommendations for improvements, where necessary, to enhance the codebase's security, reliability, and efficiency.
 
+## Mechanism Review 
+
+
+
+
+The Livepeer onchain treasury is a mechanism that provides a sustainable source of funding for public goods, such as community development and marketing, grants to developers and researchers, security audits and bug bounties, ecosystem infrastructure, and other initiatives that support the long-term growth and sustainability of the Livepeer network. The treasury is funded by current protocol inflation, without any changes to Livepeer's token economics. The funds in the treasury are governed by the community of Livepeer Token Holders (LPT holders).
+
+The treasury is governed by a multi-sig wallet, which is controlled by a committee of LPT holders. The committee is responsible for approving proposals for funding and ensuring that the funds are used in a responsible and transparent manner.
+
+The treasury mechanism has a number of benefits, including:
+
+- It provides a sustainable source of funding for public goods, which can help to accelerate the growth and adoption of the Livepeer network.
+- It makes Livepeer more decentralized and community-owned, as the LPT holders have control over the funds.
+- It can help to attract new talent and ideas to the Livepeer community.
+- It can help to improve the user experience, security, and reach of the Livepeer network.
+
+However, the treasury mechanism also has some potential risks, including:
+
+- The treasury could be subject to governance issues. The committee that governs the treasury must be accountable to the LPT holders and the decisions must be made in a fair and equitable manner.
+- The treasury could be used to fund projects that are not in the best interests of the community. The committee must carefully consider the proposals that are submitted and ensure that the funds are used for the intended purposes.
+- The treasury could lead to inflation. The treasury is funded by protocol inflation, which means that the supply of LPT tokens will increase over time. This could lead to inflation, which could make it more difficult for LPT holders to maintain their purchasing power.
+
 ## Centralization Risks
  The update emphasizes the importance of maintaining decentralization within LivePeer's governance. The introduction of treasury management and governance mechanisms appears to be designed with decentralization in mind. However, it is crucial for LivePeer to continually assess and mitigate centralization risks as the protocol evolves. Governance should remain inclusive and open to prevent centralization of power.
 
@@ -73,6 +95,8 @@ LivePeer should consider the potential consequences of governance decisions on t
 ## Conclusion
 
 The LivePeer Onchain Treasury Update is a significant enhancement to the protocol's governance and treasury management. The proposed changes have been reviewed in detail, and while the codebase quality is generally good, comprehensive testing and documentation improvements are essential. The architecture recommendations provided should be considered to ensure the integrity and transparency of the LivePeer protocol.
+
+
 
 
 
