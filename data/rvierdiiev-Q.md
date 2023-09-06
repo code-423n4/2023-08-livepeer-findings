@@ -22,3 +22,11 @@ When user delegate to transcoder, then he can use their votes. So amount of vote
 It's possible that transcoder will be slashed. Then some penalty is slashed from his balance and also he is [resigned](https://github.com/code-423n4/2023-08-livepeer/blob/main/contracts/bonding/BondingManager.sol#L407). The problem is that he still has `delegatedAmount` of votes that he can use for voting, while he is malicious, so  can do actions against protocol.
 ### Recommendation
 Make resigned delegator use only bondedAmount as votes.
+
+## QA-04. In case if updateTranscoderWithFees is called when transcoder has unbonded, then no one receives fee
+### Details
+`updateTranscoderWithFees` function is called in order to distribute fee to the transcoder and his delegators. It's possible that this function will be called not in the round where job was done, but later. So it's possible that transcoder will have to unbond during that time.
+
+Once unbonded, then it will be [not possible to send fes](https://github.com/code-423n4/2023-08-livepeer/blob/main/contracts/bonding/BondingManager.sol#L310) and delegators will use their fees.
+### Recommendation
+Do not know good solution. 
