@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "ether_sky",
+  "risk": "2",
+  "title": "Calculating the previous pool's 'cumulativeRewardFactor' from the current pool incorrectly calculates the reward.",
+  "issueId": 184,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/184"
+}
