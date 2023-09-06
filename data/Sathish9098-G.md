@@ -2,7 +2,7 @@
 
 ##
 
-## [G] Using ``memory`` can be more ``gas-efficient`` when calling the same variable for the second time compared to using ``storage``.
+## [G-1] Using ``memory`` can be more ``gas-efficient`` when calling the same variable for the second time compared to using ``storage``.
 
 [As per gas test](https://gist.github.com/sathishpic22/7105cfc254ce026bf5f90c7ec272f0ce) this will save around 150 - 200 GAS . 
 
@@ -19,7 +19,7 @@ FILE: 2023-08-livepeer/contracts/bonding/BondingManager.sol
 ```
 ##
 
-## [G-] Structs can be packed into fewer storage slots
+## [G-2] Structs can be packed into fewer storage slots
 
 Each slot saved can avoid an extra Gsset (20000 gas) for the first setting of the struct.
 
@@ -91,7 +91,7 @@ struct BondingCheckpoint {
 ```
 ##
 
-## [G-] ``IF’s/require()`` statements that check ``input arguments`` should be at the top of the function
+## [G-3] ``IF’s/require()`` statements that check ``input arguments`` should be at the top of the function
 
 FAIL CHEEPLY INSTEAD OF COSTLY 
 
@@ -131,14 +131,15 @@ FILE: 2023-08-livepeer/contracts/bonding/BondingManager.sol
 
 Caching state variable with memory saves ``100 GAS`` , ``1 SLOD ``
 
-###
+### lock.withdrawRound , del.bondedAmount , del.delegateAddress , t.cumulativeRewards  should be cached : Saves ``900 GAS`` , ``9 SLOD``
 
+https://github.com/code-423n4/2023-08-livepeer/blob/a3d801fa4690119b6f96aeb5508e58d752bda5bc/contracts/bonding/BondingManager.sol#L255
 
 ```diff
 FILE: 2023-08-livepeer/contracts/bonding/BondingManager.sol
 
 +    uint256 withdrawRound = lock.withdrawRound;
- require(isValidUnbondingLock(msg.sender, _unbondingLockId), "invalid unbonding lock ID");
+253: require(isValidUnbondingLock(msg.sender, _unbondingLockId), "invalid unbonding lock ID");
         require(
             withdrawRound <= roundsManager().currentRound(),
             "withdraw round must be before or equal to the current round"
@@ -175,7 +176,121 @@ FILE: 2023-08-livepeer/contracts/bonding/BondingManager.sol
 417:                );
 
 
++ uint256 cumulativeRewards_ = t.cumulativeRewards;
+-  t.activeCumulativeRewards = t.cumulativeRewards;
++  t.activeCumulativeRewards = cumulativeRewards_ ;
+
+
+        uint256 transcoderCommissionRewards = MathUtils.percOf(_rewards, earningsPool.transcoderRewardCut);
+        uint256 delegatorsRewards = _rewards.sub(transcoderCommissionRewards);
+        // Calculate the rewards earned by the transcoder's earned rewards
+        uint256 transcoderRewardStakeRewards = PreciseMathUtils.percOf(
+            delegatorsRewards,
+            t.activeCumulativeRewards,
+            earningsPool.totalStake
+        );
+        // Track rewards earned by the transcoder based on its earned rewards and rewardCut
+-         t.cumulativeRewards = t.cumulativeRewards.add(transcoderRewardStakeRewards).add(transcoderCommissionRewards);
++         t.cumulativeRewards = cumulativeRewards_ .add(transcoderRewardStakeRewards).add(transcoderCommissionRewards);
+   
+
++  address delegateAddress_ = del.delegateAddress ;
+        // Only will have earnings to claim if you have a delegate
+        // If not delegated, skip the earnings claim process
+-        if (del.delegateAddress != address(0)) {
++        if (delegateAddress_ != address(0)) {
+            (currentBondedAmount, currentFees) = pendingStakeAndFees(_delegator, _endRound);
+
+            // Check whether the endEarningsPool is initialised
+            // If it is not initialised set it's cumulative factors so that they can be used when a delegator
+            // next claims earnings as the start cumulative factors (see delegatorCumulativeStakeAndFees())
+-            Transcoder storage t = transcoders[del.delegateAddress];
++            Transcoder storage t = transcoders[delegateAddress_ ];
+            EarningsPool.Data storage endEarningsPool = t.earningsPoolPerRound[_endRound];
+            if (endEarningsPool.cumulativeRewardFactor == 0) {
+                uint256 lastRewardRound = t.lastRewardRound;
+                if (lastRewardRound < _endRound) {
+                    endEarningsPool.cumulativeRewardFactor = cumulativeFactorsPool(t, lastRewardRound)
+                        .cumulativeRewardFactor;
+                }
+            }
+            if (endEarningsPool.cumulativeFeeFactor == 0) {
+                uint256 lastFeeRound = t.lastFeeRound;
+                if (lastFeeRound < _endRound) {
+                    endEarningsPool.cumulativeFeeFactor = cumulativeFactorsPool(t, lastFeeRound).cumulativeFeeFactor;
+                }
+            }
+
+-            if (del.delegateAddress == _delegator) {
++            if (delegateAddress_  == _delegator) {
+                t.cumulativeFees = 0;
+                t.cumulativeRewards = 0;
+                // activeCumulativeRewards is not cleared here because the next reward() call will set it to cumulativeRewards
+            }
+        }
+
+        emit EarningsClaimed(
+-            del.delegateAddress,
++            delegateAddress_ ,
+            _delegator,
+            currentBondedAmount.sub(del.bondedAmount),
+            currentFees.sub(del.fees),
+            startRound,
+            _endRound
+        );
+
++  address delegateAddress_ = del.delegateAddress ;
+- 1582: increaseTotalStake(del.delegateAddress, amount, _newPosPrev, _newPosNext);
++ 1582: increaseTotalStake(delegateAddress_, amount, _newPosPrev, _newPosNext);
+
+-        emit Rebond(del.delegateAddress, _delegator, _unbondingLockId, amount);
++        emit Rebond(delegateAddress_ , _delegator, _unbondingLockId, amount);
+
 ```
+
+### ``bond.delegateAddress`` , ``bond.lastClaimRound`` , ``bond.bondedAmount`` should be cached : Saves ``300 GAS`` , ``3 SLOD``
+
+https://github.com/code-423n4/2023-08-livepeer/blob/a3d801fa4690119b6f96aeb5508e58d752bda5bc/contracts/bonding/BondingVotes.sol#L464-L487
+
+```diff
+FILE: Breadcrumbs2023-08-livepeer/contracts/bonding/BondingVotes.sol
+
++ address delegateAddress_ = bond.delegateAddress ;
++ uint256 lastClaimRound_ = bond.lastClaimRound ;
++ uint256 bondedAmount_ = bond.bondedAmount ;
+464:  EarningsPool.Data memory startPool = getTranscoderEarningsPoolForRound(
+-            bond.delegateAddress,
++            delegateAddress_,
+-            bond.lastClaimRound
++            delegateAddress_
+        );
+
+        (uint256 rewardRound, EarningsPool.Data memory endPool) = getLastTranscoderRewardsEarningsPool(
+-            bond.delegateAddress,
++            delegateAddress_,
+            _round
+        );
+
+-  if (rewardRound < bond.lastClaimRound) {
++  if (rewardRound < lastClaimRound_ ) {
+ // If the transcoder hasn't called reward() since the last time the delegator claimed earnings, there wil be
+            // no rewards to add to the delegator's stake so we just return the originally bonded amount.
+-            return bond.bondedAmount;
++            return bondedAmount_;
+        }
+
+(uint256 stakeWithRewards, ) = EarningsPoolLIP36.delegatorCumulativeStakeAndFees(
+            startPool,
+            endPool,
+-            bond.bondedAmount,
++            bondedAmount_,
+            0
+        );
+
+```
+##
+
+## [G-5] 
 
 
 
