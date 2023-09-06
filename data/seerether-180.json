@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "seerether",
+  "risk": "3",
+  "title": ".The _newPosPrev/_newPosNext hints do not fully prevent invalid ordering when decreasing a delegate's stake.",
+  "issueId": 180,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/180"
+}
