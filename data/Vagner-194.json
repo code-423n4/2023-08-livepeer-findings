@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "Vagner",
+  "risk": "3",
+  "title": "Fully slashed transcoder can vote with 0 weight messing up the voting calculations",
+  "issueId": 194,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/194"
+}
