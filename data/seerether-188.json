@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "seerether",
+  "risk": "3",
+  "title": "The order of decreasing total stake for the old delegate and increasing for the new delegate could lead to issues if one reverts but not the other.",
+  "issueId": 188,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/188"
+}
