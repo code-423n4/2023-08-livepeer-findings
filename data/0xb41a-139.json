@@ -1,0 +1,8 @@
+{
+  "contest": 282,
+  "handle": "0xb41a",
+  "risk": "2",
+  "title": "Improper Array Deletion [ FILE NAME : BondingManager.sol ]",
+  "issueId": 139,
+  "issueUrl": "https://github.com/code-423n4/2023-08-livepeer-findings/issues/139"
+}
