@@ -616,11 +616,11 @@ Some functions say they set one thing but set something different and some funct
 > Valid points, but expected behavior, might not fix.
 
 **[hickuphh3 (judge) commented](https://github.com/code-423n4/2023-08-livepeer-findings/issues/150#issuecomment-1730761507):**
- > **[01]**: Refactor<br>
-> **[02]**: Refactor<br>
+ > **[01]**: Recommendation<br>
+> **[02]**: Recommendation<br>
 > **[03]**: Low<br>
 > **[04]**: Non-Critical<br>
-> **[05]**: Refactor
+> **[05]**: Recommendation
 
 
 
